@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 
-
+let WINNER = false;
 function Square({ value, onSquareClick }) {
     if (value === "X") {
         return (
@@ -11,7 +11,7 @@ function Square({ value, onSquareClick }) {
         );
     } else {
         return (
-            <button className="square" onClick={onSquareClick}>
+            <button className="square" onClick={onSquareClick} style={{backgroundColor: 'blue', color: 'white'}}>
                 {value}
             </button>
         );
@@ -102,7 +102,8 @@ function calculateWinner(squares) {
         const [a, b, c] = lines[i];
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
             return squares[a];
-        }
+
+        } let WINNER = true;
     }
     return null;
 }
@@ -126,8 +127,15 @@ export default function Game() {
 
     const moves = history.map((squares, move) => {
         let description;
-        if (move > 0) {
+        if (move > 0 && move < 9) {
             description = `You are at move #${move}`;
+        } else if (move === 9){
+            if (!WINNER) {
+                description = 'personne n\'a gagné';
+            } else {
+                description = 'We have a winner';
+            }
+
         } else {
             description = 'No moves have been made'
         }
