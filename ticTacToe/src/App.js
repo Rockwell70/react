@@ -39,7 +39,7 @@ function Board({ xIsNext, squares, onPlay }) {
     const winner = calculateWinner(squares);
     let status;
     if (winner) {
-        status = `Winner ${winner}`;
+        status = `${winner} wins !`;
     } else {
         status = `Next player: ${xIsNext ? "X" : "O"}`;
     }
@@ -131,7 +131,7 @@ export default function Game() {
             description = `You are at move #${move}`;
         } else if (move === 9){
             if (!WINNER) {
-                description = 'personne n\'a gagné';
+                description = 'Personne n\'a gagné';
             } else {
                 description = 'We have a winner';
             }
@@ -151,11 +151,19 @@ export default function Game() {
     return (
         <div className="game">
             <div className="game-board">
-                <Board xIsNext ={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+                <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
             </div>
+            <div className={"refresh-page"}>
+                {<button onClick={() => {
+                window.location.reload();
+            }}>
+                Refresh Page
+            </button>}
+        </div>
             <div className="game-info">
                 <ol>{moves}</ol>
             </div>
+
         </div>
     );
 }

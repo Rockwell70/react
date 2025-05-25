@@ -82,9 +82,14 @@ body {
 }
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .game-info {
   margin-left: 20px;
+  padding-left: 10px;
 }
+.refresh-page {
+  margin-top: 10px;
+}
+
