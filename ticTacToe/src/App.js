@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 
-let WINNER = false;
+
 function Square({ value, onSquareClick }) {
     if (value === "X") {
         return (
@@ -11,7 +11,7 @@ function Square({ value, onSquareClick }) {
         );
     } else {
         return (
-            <button className="square" onClick={onSquareClick} style={{backgroundColor: 'blue', color: 'white'}}>
+            <button className="square" onClick={onSquareClick}>
                 {value}
             </button>
         );
@@ -39,7 +39,7 @@ function Board({ xIsNext, squares, onPlay }) {
     const winner = calculateWinner(squares);
     let status;
     if (winner) {
-        status = `${winner} wins !`;
+        status = `Winner ${winner}`;
     } else {
         status = `Next player: ${xIsNext ? "X" : "O"}`;
     }
@@ -102,8 +102,7 @@ function calculateWinner(squares) {
         const [a, b, c] = lines[i];
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
             return squares[a];
-
-        } let WINNER = true;
+        }
     }
     return null;
 }
@@ -127,15 +126,8 @@ export default function Game() {
 
     const moves = history.map((squares, move) => {
         let description;
-        if (move > 0 && move < 9) {
+        if (move > 0) {
             description = `You are at move #${move}`;
-        } else if (move === 9){
-            if (!WINNER) {
-                description = 'Personne n\'a gagné';
-            } else {
-                description = 'We have a winner';
-            }
-
         } else {
             description = 'No moves have been made'
         }
@@ -151,19 +143,11 @@ export default function Game() {
     return (
         <div className="game">
             <div className="game-board">
-                <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
+                <Board xIsNext ={xIsNext} squares={currentSquares} onPlay={handlePlay} />
             </div>
-            <div className={"refresh-page"}>
-                {<button onClick={() => {
-                window.location.reload();
-            }}>
-                Refresh Page
-            </button>}
-        </div>
             <div className="game-info">
                 <ol>{moves}</ol>
             </div>
-
         </div>
     );
 }
