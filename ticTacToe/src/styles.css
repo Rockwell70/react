@@ -88,3 +88,9 @@ body {
 .game-info {
   margin-left: 20px;
 }
+
+
+
+.checkbox-container label:hover {
+  background-color: yellow;
+}
