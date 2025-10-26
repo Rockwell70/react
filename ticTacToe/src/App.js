@@ -1,6 +1,4 @@
 //npm start to run
-
-import './styles.css'
 export default function MyForm() {
     return (
         <>
